@@ -44612,6 +44612,17 @@ type CreateFlowLogsInput struct {
 	// or LogGroupName.
 	LogGroupName *string `type:"string"`
 
+	// The maximum interval of time during which a flow of packets is captured and
+	// aggregated into a flow log record. You can specify 60 seconds (1 minute)
+	// or 600 seconds (10 minutes).
+	//
+	// For network interfaces attached to Nitro-based instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances),
+	// the aggregation interval is always 60 seconds, regardless of the value that
+	// you specify.
+	//
+	// Default: 600
+	MaxAggregationInterval *int64 `type:"integer"`
+
 	// The ID of the subnet, network interface, or VPC for which you want to create
 	// a flow log.
 	//
@@ -44701,6 +44712,12 @@ func (s *CreateFlowLogsInput) SetLogFormat(v string) *CreateFlowLogsInput {
 // SetLogGroupName sets the LogGroupName field's value.
 func (s *CreateFlowLogsInput) SetLogGroupName(v string) *CreateFlowLogsInput {
 	s.LogGroupName = &v
+	return s
+}
+
+// SetMaxAggregationInterval sets the MaxAggregationInterval field's value.
+func (s *CreateFlowLogsInput) SetMaxAggregationInterval(v int64) *CreateFlowLogsInput {
+	s.MaxAggregationInterval = &v
 	return s
 }
 
@@ -48936,6 +48953,9 @@ type CreateVpcEndpointInput struct {
 	// endpoint network interface.
 	SubnetIds []*string `locationName:"SubnetId" locationNameList:"item" type:"list"`
 
+	// The tags to associate with the endpoint.
+	TagSpecifications []*TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
+
 	// The type of endpoint.
 	//
 	// Default: Gateway
@@ -49021,6 +49041,12 @@ func (s *CreateVpcEndpointInput) SetSubnetIds(v []*string) *CreateVpcEndpointInp
 	return s
 }
 
+// SetTagSpecifications sets the TagSpecifications field's value.
+func (s *CreateVpcEndpointInput) SetTagSpecifications(v []*TagSpecification) *CreateVpcEndpointInput {
+	s.TagSpecifications = v
+	return s
+}
+
 // SetVpcEndpointType sets the VpcEndpointType field's value.
 func (s *CreateVpcEndpointInput) SetVpcEndpointType(v string) *CreateVpcEndpointInput {
 	s.VpcEndpointType = &v
@@ -49092,6 +49118,9 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 
 	// The private DNS name to assign to the VPC endpoint service.
 	PrivateDnsName *string `type:"string"`
+
+	// The tags to associate with the service.
+	TagSpecifications []*TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -49144,6 +49173,12 @@ func (s *CreateVpcEndpointServiceConfigurationInput) SetNetworkLoadBalancerArns(
 // SetPrivateDnsName sets the PrivateDnsName field's value.
 func (s *CreateVpcEndpointServiceConfigurationInput) SetPrivateDnsName(v string) *CreateVpcEndpointServiceConfigurationInput {
 	s.PrivateDnsName = &v
+	return s
+}
+
+// SetTagSpecifications sets the TagSpecifications field's value.
+func (s *CreateVpcEndpointServiceConfigurationInput) SetTagSpecifications(v []*TagSpecification) *CreateVpcEndpointServiceConfigurationInput {
+	s.TagSpecifications = v
 	return s
 }
 
@@ -72761,6 +72796,14 @@ type FlowLog struct {
 	// The name of the flow log group.
 	LogGroupName *string `locationName:"logGroupName" type:"string"`
 
+	// The maximum interval of time, in seconds, during which a flow of packets
+	// is captured and aggregated into a flow log record.
+	//
+	// For network interfaces attached to Nitro-based instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances),
+	// the aggregation interval is always 60 seconds (1 minute), regardless of the
+	// specified value.
+	MaxAggregationInterval *int64 `locationName:"maxAggregationInterval" type:"integer"`
+
 	// The ID of the resource on which the flow log was created.
 	ResourceId *string `locationName:"resourceId" type:"string"`
 
@@ -72835,6 +72878,12 @@ func (s *FlowLog) SetLogFormat(v string) *FlowLog {
 // SetLogGroupName sets the LogGroupName field's value.
 func (s *FlowLog) SetLogGroupName(v string) *FlowLog {
 	s.LogGroupName = &v
+	return s
+}
+
+// SetMaxAggregationInterval sets the MaxAggregationInterval field's value.
+func (s *FlowLog) SetMaxAggregationInterval(v int64) *FlowLog {
+	s.MaxAggregationInterval = &v
 	return s
 }
 
