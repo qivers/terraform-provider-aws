@@ -32,7 +32,7 @@ resource "aws_config_config_rule" "r" {
 
 resource "aws_config_configuration_recorder" "foo" {
   name     = "example"
-  role_arn = "${aws_iam_role.r.arn}"
+  role_arn = aws_iam_role.r.arn
 }
 
 resource "aws_iam_role" "r" {
@@ -57,7 +57,7 @@ POLICY
 
 resource "aws_iam_role_policy" "p" {
   name = "my-awsconfig-policy"
-  role = "${aws_iam_role.r.id}"
+  role = aws_iam_role.r.id
 
   policy = <<POLICY
 {
